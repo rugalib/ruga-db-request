@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ruga\Skeleton;
+namespace Ruga\Request;
 
 
 /**
