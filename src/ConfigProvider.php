@@ -6,6 +6,7 @@ namespace Ruga\Request;
 
 
 use Ruga\Db\Schema\Updater;
+use Ruga\Request\Item\RequestItemTable;
 
 /**
  * ConfigProvider.
@@ -21,10 +22,11 @@ class ConfigProvider
                 Updater::class => [
                     'components' => [
                         Request::class => [
-                            Updater::CONF_REQUESTED_VERSION => 1,
+                            Updater::CONF_REQUESTED_VERSION => 2,
                             Updater::CONF_SCHEMA_DIRECTORY => __DIR__ . '/../ruga-dbschema-request',
                             Updater::CONF_TABLES => [
-                                'RequestTable' => RequestTable::class
+                                'RequestTable' => RequestTable::class,
+                                'RequestItemTable' => RequestItemTable::class,
                             ],
                         ],
                     ],
@@ -34,9 +36,11 @@ class ConfigProvider
                 'services' => [],
                 'factories' => [
                     RequestTable::class => Container\RequestTableFactory::class,
+                    RequestItemTable::class => Item\Container\RequestItemTableFactory::class,
                 ],
                 'aliases' => [
                     'RequestTable' => RequestTable::class,
+                    'RequestItemTable' => RequestItemTable::class,
                 ],
                 'invokables' => [],
                 'delegators' => [],

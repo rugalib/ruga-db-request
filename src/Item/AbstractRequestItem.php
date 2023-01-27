@@ -2,21 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Ruga\Request;
+namespace Ruga\Request\Item;
 
 use Ruga\Db\Row\AbstractRugaRow;
+use Ruga\Db\Row\Exception\InvalidArgumentException;
 use Ruga\Db\Row\Feature\FullnameFeatureRowInterface;
 
 /**
- * Abstract request.
+ * Abstract REQUEST ITEM.
  *
- * @see      Request
- * @see      RequestAttributesInterface
+ * @see      RequestItem
+ * @see      RequestItemAttributesInterface
  * @author   Roland Rusch, easy-smart solution GmbH <roland.rusch@easy-smart.ch>
  */
-abstract class AbstractRequest extends AbstractRugaRow implements RequestAttributesInterface,
-                                                                RequestInterface,
-                                                                FullnameFeatureRowInterface
+abstract class AbstractRequestItem extends AbstractRugaRow implements RequestItemAttributesInterface,
+                                                                      RequestItemInterface,
+                                                                      FullnameFeatureRowInterface
 {
     /**
      * Constructs a display name from the given fields.

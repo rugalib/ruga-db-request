@@ -15,6 +15,7 @@ use Ruga\Db\Row\RowAttributesInterface;
  * @property \DateTimeImmutable      $request_date           Date the REQUEST was submitted
  * @property \DateTimeImmutable|null $response_required_date Date until a response is required
  * @property int|null                $request_role           // TODO
+ * @property string|null             $name                   Subject of the REQUEST
  * @property string|null             $description            Details of the REQUEST
  * @property string|null             $remark                 Remark
  */

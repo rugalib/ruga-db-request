@@ -82,6 +82,15 @@
       <path value="$PROJECT_DIR$/vendor/rugalib/ruga-log" />
       <path value="$PROJECT_DIR$/vendor/rugalib/ruga-std" />
       <path value="$PROJECT_DIR$/vendor/rugalib/ruga-db-user" />
+      <path value="$PROJECT_DIR$/vendor/dflydev/fig-cookies" />
+      <path value="$PROJECT_DIR$/vendor/rugalib/ruga-i18n" />
+      <path value="$PROJECT_DIR$/vendor/rugalib/ruga-money" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-session" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-server-middleware" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-server-handler" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-view" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-i18n" />
+      <path value="$PROJECT_DIR$/vendor/laminas/laminas-escaper" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
