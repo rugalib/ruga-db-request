@@ -58,6 +58,7 @@ abstract class AbstractTestSetUp extends \Ruga\Db\PHPUnit\AbstractTestSetUp
             [
                 new \Ruga\Db\ConfigProvider(),
                 new \Ruga\User\ConfigProvider(),
+                new \Ruga\Party\ConfigProvider(),
                 new \Ruga\Request\ConfigProvider(),
                 new PhpFileProvider(__DIR__ . "/../../config/config.php"),
                 new PhpFileProvider(__DIR__ . "/../../config/config.local.php"),

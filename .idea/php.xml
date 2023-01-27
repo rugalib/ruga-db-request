@@ -91,6 +91,10 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-view" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-i18n" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-escaper" />
+      <path value="$PROJECT_DIR$/vendor/rugalib/ruga-db-party" />
+      <path value="$PROJECT_DIR$/vendor/rugalib/ruga-db-contact" />
+      <path value="$PROJECT_DIR$/vendor/rugalib/ruga-db-person" />
+      <path value="$PROJECT_DIR$/vendor/rugalib/ruga-db-organization" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
