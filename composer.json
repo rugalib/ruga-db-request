@@ -28,12 +28,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Ruga\\Skeleton\\": "src/"
+      "Ruga\\Request\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Ruga\\Skeleton\\Test\\": "test/src"
+      "Ruga\\Request\\Test\\": "test/src"
     }
   },
   "extra": {
