@@ -12,5 +12,11 @@ namespace Ruga\Request;
  */
 interface RequestInterface extends RequestAttributesInterface
 {
+    /**
+     * Find the next available sequence number for new REQUEST ITEMs.
+     *
+     * @return int
+     */
+    public function getNextSeq(): int;
 
 }

@@ -7,6 +7,8 @@ namespace Ruga\Request\Item;
 use Ruga\Db\Row\AbstractRugaRow;
 use Ruga\Db\Row\Exception\InvalidArgumentException;
 use Ruga\Db\Row\Feature\FullnameFeatureRowInterface;
+use Ruga\Request\Item\Exception\ParentNotSavedException;
+use Ruga\Request\RequestInterface;
 
 /**
  * Abstract REQUEST ITEM.
@@ -30,4 +32,20 @@ abstract class AbstractRequestItem extends AbstractRugaRow implements RequestIte
     {
         return "" . parent::offsetGet('name');
     }
+    
+    
+    
+    /**
+     * Link REQUEST ITEM to a REQUEST. A REQUEST ITEM can not exist on its own and must always be linked to a REQUEST.
+     *
+     * @param RequestInterface $request
+     *
+     * @return void
+     */
+    public function linkTo(RequestInterface $request)
+    {
+        $this->Request_id = $request->id;
+        $this->seq = $request->getNextSeq();
+    }
+    
 }

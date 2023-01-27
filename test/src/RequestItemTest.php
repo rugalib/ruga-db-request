@@ -63,4 +63,35 @@ class RequestItemTest extends \Ruga\Request\Test\PHPUnit\AbstractTestSetUp
         $requestItem->save();
     }
     
+    
+    public function testCanCreateRequestItemAndLinkToExistingRequest()
+    {
+        /** @var Request $request */
+        $request = (new RequestTable($this->getAdapter()))->findById(2)->current();
+        $this->assertInstanceOf(Request::class, $request);
+        
+        $requestItemTable = new RequestItemTable($this->getAdapter());
+        /** @var RequestItem $requestItem */
+        $requestItem = $requestItemTable->createRow();
+        $this->assertInstanceOf(RequestItem::class, $requestItem);
+        $requestItem->Request_id=$request->id;
+        $requestItem->seq=$request->getNextSeq();
+        $requestItem->save();
+    }
+    
+    
+    public function testCanAddRequestItemAtEnd()
+    {
+        /** @var Request $request */
+        $request = (new RequestTable($this->getAdapter()))->findById(2)->current();
+        $this->assertInstanceOf(Request::class, $request);
+    
+        $requestItemTable = new RequestItemTable($this->getAdapter());
+        /** @var RequestItem $requestItem */
+        $requestItem = $requestItemTable->createRow();
+        $this->assertInstanceOf(RequestItem::class, $requestItem);
+        $requestItem->linkTo($request);
+        $requestItem->save();
+    }
+    
 }

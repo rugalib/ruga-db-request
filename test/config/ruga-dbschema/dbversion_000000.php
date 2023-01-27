@@ -18,6 +18,7 @@ INSERT INTO `{$request}` (`fullname`, `request_subtype`, `request_date`, `respon
 VALUES
      (NULL, 'RFP', '2023-01-26 00:00:00', NULL, NULL, NULL, NULL, NULL, '2023-01-26 16:00:00', 1, '2023-01-26 16:00:00', 1)
     ,(NULL, 'RFQ', '2023-01-27 00:00:00', NULL, NULL, NULL, NULL, NULL, '2023-01-27 16:00:00', 1, '2023-01-27 16:00:00', 1)
+    ,(NULL, 'RFI', '2023-01-28 00:00:00', NULL, NULL, NULL, NULL, NULL, '2023-01-28 16:00:00', 1, '2023-01-28 16:00:00', 1)
 ;
 
 INSERT INTO `{$requestItem}` (`fullname`, `Request_id`, `seq`, `required_by_date`, `quantity`, `maximum_amount`, `name`, `description`, `remark`, `created`, `createdBy`, `changed`, `changedBy`)

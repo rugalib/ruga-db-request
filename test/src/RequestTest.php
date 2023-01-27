@@ -21,16 +21,11 @@ class RequestTest extends \Ruga\Request\Test\PHPUnit\AbstractTestSetUp
     
     
     
-    /**
-     * Creates new REQUESTs and saves them without setting data.
-     */
     public function testCanCreateRequest()
     {
         $requestTable = new \Ruga\Request\RequestTable($this->getAdapter());
         /** @var Request $request */
         $request = $requestTable->createRow(['request_date' => '2023-01-01']);
-//        $this->assertInstanceOf(\Ruga\Party\Link\AbstractLinkParty::class, $request->getSubtypeLink());
-//        $this->assertInstanceOf(\Ruga\Party\Subtype\SubtypeRowInterface::class, $request->getSubtype());
         $request->save();
         $this->assertInstanceOf(\Ruga\Request\Request::class, $request);
         
@@ -50,17 +45,45 @@ class RequestTest extends \Ruga\Request\Test\PHPUnit\AbstractTestSetUp
         $request->request_subtype = RequestSubtype::RFP();
         $request->save();
         $this->assertInstanceOf(\Ruga\Request\Request::class, $request);
-        /*
-        $request = $requestTable->createRow(['party_subtype' => \Ruga\Party\PartySubtypeType::ORGANIZATION]);
-        $this->assertInstanceOf(\Ruga\Party\Link\Organization\PartyHasOrganization::class, $request->getSubtypeLink());
-        $this->assertInstanceOf(\Ruga\Party\Subtype\Organization\Organization::class, $request->getSubtype());
-        $request->save();
-        
-        $request = $requestTable->createRow(['party_subtype' => \Ruga\Party\PartySubtypeType::PERSON]);
-        $this->assertInstanceOf(\Ruga\Party\Link\Person\PartyHasPerson::class, $request->getSubtypeLink());
-        $this->assertInstanceOf(\Ruga\Party\Subtype\Person\Person::class, $request->getSubtype());
-        $request->save();
-        */
     }
     
+    
+    public function testCanFindNextAvailableSeq()
+    {
+        /** @var Request $request */
+        $request = (new RequestTable($this->getAdapter()))->findById(1)->current();
+        $this->assertInstanceOf(Request::class, $request);
+        print_r($request->uniqueid);
+        echo PHP_EOL;
+        $nextSeq=$request->getNextSeq();
+        echo "getNextSeq(): ";
+        print_r($nextSeq);
+        echo PHP_EOL;
+        $this->assertEquals(2, $nextSeq);
+    
+        
+        /** @var Request $request */
+        $request = (new RequestTable($this->getAdapter()))->findById(2)->current();
+        $this->assertInstanceOf(Request::class, $request);
+        print_r($request->uniqueid);
+        echo PHP_EOL;
+        $nextSeq=$request->getNextSeq();
+        echo "getNextSeq(): ";
+        print_r($nextSeq);
+        echo PHP_EOL;
+        $this->assertEquals(5, $nextSeq);
+    
+    
+        /** @var Request $request */
+        $request = (new RequestTable($this->getAdapter()))->findById(3)->current();
+        $this->assertInstanceOf(Request::class, $request);
+        print_r($request->uniqueid);
+        echo PHP_EOL;
+        $nextSeq=$request->getNextSeq();
+        echo "getNextSeq(): ";
+        print_r($nextSeq);
+        echo PHP_EOL;
+        $this->assertEquals(1, $nextSeq);
+    
+    }
 }
