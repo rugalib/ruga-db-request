@@ -19,7 +19,7 @@ CREATE TABLE `{$request}` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fullname` VARCHAR(190) NULL,
   `request_subtype` SET('RFP', 'RFQ', 'RFI') NULL DEFAULT NULL,
-  `request_date` DATETIME NOT NULL,
+  `request_date` DATETIME NULL DEFAULT NULL,
   `response_required_date` DATETIME NULL DEFAULT NULL,
   `request_role` INT NULL,
   `description` TEXT NULL,

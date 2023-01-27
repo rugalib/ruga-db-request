@@ -18,5 +18,18 @@ abstract class AbstractRequest extends AbstractRugaRow implements RequestAttribu
                                                                 RequestInterface,
                                                                 FullnameFeatureRowInterface
 {
+    /**
+     * Constructs a display name from the given fields.
+     * Fullname is saved in the row to speed up queries.
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function getFullname(): string
+    {
+        return "";
+//        $subtype_fullname = $this->getSubtype()->getFullname();
+//        return "" . (empty($subtype_fullname) ? parent::offsetGet('fullname') : $subtype_fullname);
+    }
 
 }
