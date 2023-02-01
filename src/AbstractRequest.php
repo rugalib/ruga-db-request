@@ -7,7 +7,9 @@ namespace Ruga\Request;
 use Laminas\Db\Sql\Expression;
 use Ruga\Db\Row\AbstractRugaRow;
 use Ruga\Db\Row\Feature\FullnameFeatureRowInterface;
+use Ruga\Party\EntityHasParty\EntityRowWithPartyRoleTrait;
 use Ruga\Request\Item\RequestItemTable;
+use Ruga\Party\EntityHasParty\EntityRowWithPartyRoleInterface;
 
 /**
  * Abstract request.
@@ -18,8 +20,11 @@ use Ruga\Request\Item\RequestItemTable;
  */
 abstract class AbstractRequest extends AbstractRugaRow implements RequestAttributesInterface,
                                                                   RequestInterface,
-                                                                  FullnameFeatureRowInterface
+                                                                  FullnameFeatureRowInterface,
+                                                                  EntityRowWithPartyRoleInterface
 {
+    use EntityRowWithPartyRoleTrait;
+    
     /**
      * Constructs a display name from the given fields.
      * Fullname is saved in the row to speed up queries.
@@ -46,7 +51,7 @@ abstract class AbstractRequest extends AbstractRugaRow implements RequestAttribu
             return 1;
         }
         
-        $adapter=$this->getTableGateway()->getAdapter();
+        $adapter = $this->getTableGateway()->getAdapter();
         $requestItemTable = new RequestItemTable($adapter);
         $sql = $requestItemTable->getSql();
         $select = $sql->select();
@@ -54,12 +59,16 @@ abstract class AbstractRequest extends AbstractRugaRow implements RequestAttribu
         $select->where([
                            'Request_id' => $this->id,
                        ]);
-        $sqlString=$sql->buildSqlString($select);
+        $sqlString = $sql->buildSqlString($select);
         \Ruga\Log::log_msg("SQL={$sqlString}");
-    
+        
         $ret = $adapter->query($sqlString)->execute();
         
         return ($ret->current()['maxseq'] ?? 0) + 1;
     }
+    
+    
+    
+    
     
 }

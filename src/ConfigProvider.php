@@ -6,7 +6,9 @@ namespace Ruga\Request;
 
 
 use Ruga\Db\Schema\Updater;
+use Ruga\Party\Role\PartyRole;
 use Ruga\Request\Item\RequestItemTable;
+use Ruga\Request\PartyRole\RequestHasPartyTable;
 
 /**
  * ConfigProvider.
@@ -22,11 +24,12 @@ class ConfigProvider
                 Updater::class => [
                     'components' => [
                         Request::class => [
-                            Updater::CONF_REQUESTED_VERSION => 2,
+                            Updater::CONF_REQUESTED_VERSION => 3,
                             Updater::CONF_SCHEMA_DIRECTORY => __DIR__ . '/../ruga-dbschema-request',
                             Updater::CONF_TABLES => [
                                 'RequestTable' => RequestTable::class,
                                 'RequestItemTable' => RequestItemTable::class,
+                                'RequestHasPartyTable' => RequestHasPartyTable::class,
                             ],
                         ],
                     ],
@@ -37,10 +40,12 @@ class ConfigProvider
                 'factories' => [
                     RequestTable::class => Container\RequestTableFactory::class,
                     RequestItemTable::class => Item\Container\RequestItemTableFactory::class,
+                    RequestHasPartyTable::class => PartyRole\Container\RequestHasPartyTableFactory::class,
                 ],
                 'aliases' => [
                     'RequestTable' => RequestTable::class,
                     'RequestItemTable' => RequestItemTable::class,
+                    'RequestHasPartyTable' => RequestHasPartyTable::class,
                 ],
                 'invokables' => [],
                 'delegators' => [],
