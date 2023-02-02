@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ruga\Request\Test;
 
 use Ruga\Party\Party;
+use Ruga\Party\PartyTable;
 use Ruga\Request\PartyRole\RequestHasPartyRole;
 use Ruga\Request\Request;
 use Ruga\Request\RequestTable;
@@ -60,10 +61,34 @@ class RequestHasPartyTest extends \Ruga\Request\Test\PHPUnit\AbstractTestSetUp
         echo PHP_EOL;
         $this->assertEquals(3, $party->id);
         
-        $ret=$request->unlinkParty($party, RequestHasPartyRole::ORIGINATOR());
+        $ret = $request->unlinkParty($party, RequestHasPartyRole::ORIGINATOR());
         
         $this->assertTrue($ret);
     }
     
+    
+    
+    public function testCanAddOriginator(): void
+    {
+        /** @var Request $request */
+        $request = $this->getAdapter()->rowFactory(2, RequestTable::class);
+        $this->assertInstanceOf(Request::class, $request);
+        echo "{$request->idname}" . PHP_EOL;
+        
+        /** @var Party $party */
+        $party = $this->getAdapter()->rowFactory(4, PartyTable::class);
+        $this->assertInstanceOf(Party::class, $party);
+        
+        $link = $request->linkParty($party, RequestHasPartyRole::ORIGINATOR());
+        $link->save();
+    
+    
+        $originators = $request->findPartyByRole(RequestHasPartyRole::ORIGINATOR());
+        $this->assertCount(1, $originators);
+        /** @var Party $party */
+        $party = $originators->current();
+        echo "ORIGINATOR: {$party->idname}" . PHP_EOL;
+        $this->assertEquals(4, $party->id);
+    }
     
 }
