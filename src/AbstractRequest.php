@@ -55,7 +55,7 @@ abstract class AbstractRequest extends AbstractRugaRow implements RequestAttribu
         $requestItemTable = new RequestItemTable($adapter);
         $sql = $requestItemTable->getSql();
         $select = $sql->select();
-        $select->columns(['maxseq' => new Expression('MAX(seq)')]);
+        $select->columns(['maxseq' => new Expression('COALESCE(MAX(seq), 0)')]);
         $select->where([
                            'Request_id' => $this->id,
                        ]);

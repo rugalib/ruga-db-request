@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ruga\Request\Item;
 
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Sql;
 use Ruga\Db\Row\AbstractRugaRow;
 use Ruga\Db\Row\Exception\InvalidArgumentException;
 use Ruga\Db\Row\Feature\FullnameFeatureRowInterface;
@@ -45,7 +47,33 @@ abstract class AbstractRequestItem extends AbstractRugaRow implements RequestIte
     public function linkTo(RequestInterface $request)
     {
         $this->Request_id = $request->id;
-        $this->seq = $request->getNextSeq();
+//        $this->seq = $request->getNextSeq();
     }
+    
+    
+    
+    /**
+     * Save row, but first add sub select for the seq column.
+     *
+     * @return int
+     * @throws \Exception
+     * @todo actually, this should be done with a ruga-db feature
+     */
+    public function save()
+    {
+        if ($this->isNew() && (($this->seq === null) || ($this->seq == 0))) {
+            // Create sub request for seq column
+            $sql = (new Sql($this->getTableGateway()->getAdapter()))->select();
+            $sql->from(['P' => $this->getTableGateway()->getTable()]);
+            $sql->columns(['next_seq' => new Expression("COALESCE(MAX(seq), 0) + 1")]);
+            $sql->where(['Request_id' => $this->Request_id]);
+            
+            $this->seq = new Expression(
+                "({$sql->getSqlString($this->getTableGateway()->getAdapter()->getPlatform())})"
+            );
+        }
+        return parent::save();
+    }
+    
     
 }
