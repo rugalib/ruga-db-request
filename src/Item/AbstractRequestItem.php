@@ -1,4 +1,8 @@
 <?php
+/*
+ * SPDX-FileCopyrightText: 2023 Roland Rusch, easy-smart solution GmbH <roland.rusch@easy-smart.ch>
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 declare(strict_types=1);
 
@@ -7,9 +11,7 @@ namespace Ruga\Request\Item;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Sql;
 use Ruga\Db\Row\AbstractRugaRow;
-use Ruga\Db\Row\Exception\InvalidArgumentException;
 use Ruga\Db\Row\Feature\FullnameFeatureRowInterface;
-use Ruga\Request\Item\Exception\ParentNotSavedException;
 use Ruga\Request\RequestInterface;
 
 /**
