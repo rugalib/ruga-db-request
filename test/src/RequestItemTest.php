@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ruga\Request\Test;
 
 use Laminas\ServiceManager\ServiceManager;
+use Ruga\Db\Row\Exception\NoDefaultValueException;
 use Ruga\Request\Item\RequestItem;
 use Ruga\Request\Item\RequestItemTable;
 use Ruga\Request\Request;
@@ -26,7 +27,7 @@ class RequestItemTest extends \Ruga\Request\Test\PHPUnit\AbstractTestSetUp
         /** @var RequestItem $requestItem */
         $requestItem = $requestItemTable->createRow();
         $this->assertInstanceOf(RequestItem::class, $requestItem);
-        $this->expectException(\Laminas\Db\Adapter\Exception\InvalidQueryException::class);
+        $this->expectException(NoDefaultValueException::class);
         $requestItem->save();
     }
     
